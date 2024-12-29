@@ -1,0 +1,11 @@
+__pycache__/
+env/
+venv/
+w-env/
+l-env/
+linux_msi.py
+.mypy_cache/
+.vscode/
+config.*
+help.txt
+*.db
