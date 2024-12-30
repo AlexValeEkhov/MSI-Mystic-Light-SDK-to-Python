@@ -720,44 +720,37 @@ if __name__ == "__main__":
             print(f"Current Bright Level: {led_bright}")
             print(f"Max Speed Level: {max_speed}")
             print(f"Current Speed Level: {led_speed}")
-            print(
-                "\n1: Change LED color.\n"
-                + "2: Change LED style.\n"
-                + "3: Change LED Brightness.\n"
-                + "4: Change LED Speed.\n"
-                + "0: Exit"
-            )
-            a = int(input())
-            if a == 1:
-                try:
-                    r = int(input("Enter red (0-255): "))
-                    g = int(input("Enter green (0-255): "))
-                    b = int(input("Enter blue (0-255): "))
-                except ValueError:
-                    print("Invalid input. Please enter integer values.")
-                    continue
-                if set_led_color(device_type, index, r, g, b):
-                    color = {"r": r, "g": g, "b": b}
-            elif a == 2:
-                new_style = set_led_style(device_type, index, led_styles)
-                if new_style:
-                    style = new_style
-            elif a == 3:
-                try:
+            try:
+                a = int(
+                    input(
+                        "\n1: Change LED color.\n"
+                        "2: Change LED style.\n"
+                        "3: Change LED Brightness.\n"
+                        "4: Change LED Speed.\n"
+                        "0: Exit\n"
+                    )
+                )
+                if a == 1:
+                    r, g, b = [
+                        int(input(f"Enter {color} (0-255): ")) for color in ["red", "green", "blue"]
+                    ]
+                    if set_led_color(device_type, index, r, g, b):
+                        color = {"r": r, "g": g, "b": b}
+                elif a == 2:
+                    new_style = set_led_style(device_type, index, led_styles)
+                    if new_style:
+                        style = new_style
+                elif a == 3:
                     bright = int(input(f"Enter brightness level (1-{max_bright}): "))
-                except ValueError:
-                    print("Invalid input. Please enter integer values.")
-                    continue
-                if set_led_bright(device_type, index, bright):
-                    led_bright = bright
-            elif a == 4:
-                try:
+                    if set_led_bright(device_type, index, bright):
+                        led_bright = bright
+                elif a == 4:
                     speed = int(input(f"Enter speed level (1-{max_speed}): "))
-                except ValueError:
-                    print("Invalid input. Please enter integer values.")
-                    continue
-                if set_led_speed(device_type, index, speed):
-                    led_speed = speed
-            elif a == 0:
-                break
-    release_dll()
+                    if set_led_speed(device_type, index, speed):
+                        led_speed = speed
+                elif a == 0:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter integer values.")
+            continue
+release_dll()
