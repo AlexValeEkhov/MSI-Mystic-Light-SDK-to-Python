@@ -6,6 +6,6 @@ The main function is for demonstration of how it works, but as long as I have on
 You are welcome to try. :)
 
 Requirements: 
-MS Windows
-MSI Mystic Light
+MS Windows,
+MSI Mystic Light,
 comtypes
